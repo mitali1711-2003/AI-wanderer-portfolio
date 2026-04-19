@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitali Agarwal — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FAF8F3;
+    --ink: #1A1714;
+    --muted: #6B6560;
+    --accent: #C84B31;
+    --accent-light: #F5EDE9;
+    --border: rgba(26,23,20,0.1);
+    --card-bg: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  section { padding: 6rem 4rem; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,75,49,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block; width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    padding: 0.75rem 2rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-outline {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hero-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 8px 8px 0 rgba(200,75,49,0.08);
+  }
+
+  .card-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #FF5F57; }
+  .dot-yellow { background: #FEBC2E; }
+  .dot-green { background: #28C840; }
+
+  .code-line {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--muted);
+  }
+
+  .code-key { color: #C084FC; }
+  .code-str { color: #16a34a; }
+  .code-num { color: #DC2626; }
+  .code-comment { color: #6B7280; font-style: italic; }
+
+  /* SKILLS */
+  .skills-section { background: var(--ink); color: var(--cream); }
+
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600; margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;
+    border: 1px solid rgba(255,255,255,0.08);
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .skill-cell {
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+  }
+  .skill-cell:hover { background: rgba(200,75,49,0.08); }
+
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .skill-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .skill-desc { font-size: 0.78rem; color: rgba(250,248,243,0.45); line-height: 1.5; }
+
+  /* PROJECT */
+  .project-section { max-width: 1100px; margin: 0 auto; }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+    box-shadow: 12px 12px 0 rgba(200,75,49,0.05);
+    margin-bottom: 3rem;
+  }
+
+  .project-content { padding: 3rem; }
+
+  .project-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; line-height: 1;
+    color: rgba(200,75,49,0.1);
+    font-weight: 600;
+    margin-bottom: -1rem;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-subtitle {
+    font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.25rem;
+  }
+
+  .project-desc {
+    font-size: 0.92rem; color: var(--muted);
+    line-height: 1.75; margin-bottom: 1.5rem;
+  }
+
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+
+  .tag {
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  .project-features {
+    background: var(--accent-light);
+    padding: 3rem;
+    display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
+  }
+
+  .feature-item { display: flex; align-items: flex-start; gap: 12px; }
+
+  .feature-bullet {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0; margin-top: 6px;
+  }
+
+  .feature-text { font-size: 0.88rem; color: var(--ink); line-height: 1.5; }
+  .feature-text strong { font-weight: 500; }
+
+  /* CONTACT */
+  .contact-section { background: var(--ink); color: var(--cream); text-align: center; }
+
+  .contact-email {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,75,49,0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.2s;
+    display: inline-block; margin: 1.5rem 0 2.5rem;
+  }
+  .contact-email:hover { border-color: var(--accent); }
+
+  .contact-links { display: flex; justify-content: center; gap: 2rem; }
+  .contact-link {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,248,243,0.5); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+
+  footer {
+    background: var(--ink); color: rgba(250,248,243,0.25);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.75rem; letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .project-card { grid-template-columns: 1fr; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">MA</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag fade-in">Full Stack Developer</div>
+      <h1 class="fade-in delay-1">Building things that <em>actually work.</em></h1>
+      <p class="hero-desc fade-in delay-2">
+        Hi, I'm Mitali — a full stack developer who loves turning ideas into real, functional web apps. I work across the stack, from Python & Flask backends to responsive, interactive frontends.
+      </p>
+      <div class="hero-btns fade-in delay-3">
+        <a href="#projects" class="btn-primary">View my work</a>
+        <a href="#contact" class="btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in delay-2">
+      <div class="hero-card">
+        <div class="card-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="code-line"><span class="code-key">const</span> mitali = {</div>
+        <div class="code-line" style="padding-left:1rem"><span class="code-key">role</span>: <span class="code-str">"Full Stack Dev"</span>,</div>
+        <div class="code-line" style="padding-left:1rem"><span class="code-key">stack</span>: [<span class="code-str">"Python"</span>, <span class="code-str">"Flask"</span>, <span class="code-str">"JS"</span>],</div>
+        <div class="code-line" style="padding-left:1rem"><span class="code-key">status</span>: <span class="code-str">"open to work"</span>,</div>
+        <div class="code-line" style="padding-left:1rem"><span class="code-key">passion</span>: <span class="code-str">"clean code"</span>,</div>
+        <div class="code-line" style="padding-left:1rem"><span class="code-key">coffee</span>: <span class="code-num">Infinity</span> <span class="code-comment">// obviously</span></div>
+        <div class="code-line">}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">What I work with</div>
+    <h2>Tech stack</h2>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Backend logic, APIs, data processing & automation</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">⚗️</div>
+        <div class="skill-name">Flask</div>
+        <div class="skill-desc">REST APIs, routing, server-side rendering</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-desc">Frontend interactivity, DOM, async programming</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-desc">Semantic markup, responsive layouts, animations</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">SQL / SQLite</div>
+        <div class="skill-desc">Database design, ORM models, async queries</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-icon">🔧</div>
+        <div class="skill-name">Git & GitHub</div>
+        <div class="skill-desc">Version control, collaboration, open source</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="projects" style="padding: 6rem 4rem; background: var(--cream);">
+  <div class="project-section">
+    <div class="section-label">Featured work</div>
+    <h2 style="margin-bottom: 2.5rem;">Projects</h2>
+
+    <div class="project-card">
+      <div class="project-content">
+        <div class="project-number">01</div>
+        <h3 class="project-title">AI Wanderer</h3>
+        <div class="project-subtitle">AI-powered travel planner</div>
+        <p class="project-desc">
+          A full-stack travel planning app that generates personalized itineraries across 606 places and 20 cities. Features AI chat, real-time weather, route mapping, and PDF export — all in one.
+        </p>
+        <div class="tech-tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">React</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">Three.js</span>
+          <span class="tag">OpenWeatherMap</span>
+          <span class="tag">Leaflet</span>
+        </div>
+        <!-- UPDATE: Replace # with your actual GitHub repo link -->
+        <a href="https://github.com/YOUR_USERNAME/AI_Wanderer" class="btn-primary" style="display:inline-block; text-decoration:none;">View on GitHub →</a>
+      </div>
+      <div class="project-features">
+        <div class="feature-item">
+          <div class="feature-bullet"></div>
+          <div class="feature-text"><strong>Smart itinerary engine</strong> — 606 curated places across 20 cities with content-based filtering</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-bullet"></div>
+          <div class="feature-text"><strong>Knapsack budget optimizer</strong> — algorithmic approach to maximize trip value within budget</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-bullet"></div>
+          <div class="feature-text"><strong>AI chat assistant</strong> — context-aware travel recommendations powered by LLM</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-bullet"></div>
+          <div class="feature-text"><strong>3D interactive globe</strong> — Three.js visualization with animated route arcs</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-bullet"></div>
+          <div class="feature-text"><strong>PDF export</strong> — download full itinerary as a formatted PDF via ReportLab</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label" style="color: rgba(200,75,49,0.7);">Let's work together</div>
+  <h2 style="color: var(--cream);">Get in touch</h2>
+  <p style="color: rgba(250,248,243,0.5); font-size: 0.95rem; max-width: 400px; margin: 0 auto;">
+    I'm actively looking for my first full-time role or internship. If you're hiring or just want to say hello —
+  </p>
+  <!-- UPDATE: Replace with your actual email -->
+  <a href="mailto:mitaliagarwal270@email.com" class="contact-email">mitaliagarwal270@email.com</a>
+  <div class="contact-links">
+    <!-- UPDATE: Replace with your actual GitHub and LinkedIn URLs -->
+    <a href="https://github.com/https://github.com/mitali1711-2003/AI-Wanderer" class="contact-link">GitHub</a>
+    <a href="https://linkedin.com/in/https://www.linkedin.com/in/mitali-agarwal-01b4212bb" class="contact-link">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Mitali Agarwal — Built with HTML, CSS & JavaScript
+</footer>
+
+</body>
+</html>
